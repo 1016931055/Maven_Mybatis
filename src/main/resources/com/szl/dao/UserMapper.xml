@@ -7,19 +7,30 @@
 <mapper namespace = "com.szl.dao.UserMapper">
 
     <!-- SQL查询语句 -->
-    <select id="findAllUser" resultType="com.szl.pojo.User">
+    <!-- id是方法名 -->
+    <select id="findAllUser"
+            resultType="com.szl.pojo.User">
         select id, username, birthday, sex, address
         from user
     </select>
 
-<!--    <select id="findUserById" parameterType = "_int" resultType="com.itheima.pojo.User">-->
-<!--        select id,user_name, birthday, sex, address-->
-<!--        from user-->
-<!--        where id = #{id}-->
-<!--    </select>-->
+    <!-- 根据id查询用户数据-->
+    <!-- mybatis 可自动推导参数,故可省略 parameterType这一项-->
+    <select id="findUserById" parameterType = "_int"
+            resultType="com.szl.pojo.User">  <!-- 查询的数据封装到User中 -->
+        select id, username, birthday, sex, address
+        from user
+        where id = #{id}
+    </select>
 
-<!--    <insert id="addUser">-->
-<!--        insert into student(stu_name, stu_age, stu_gender, stu_phone, stu_address)-->
-<!--        value('张三',22,'男','12345678','上海')-->
-<!--    </insert>-->
+    <!-- 插入数据-->
+    <insert id="addUser">
+        insert into user(username, birthday, sex, address)
+        value(#{username}, #{birthday}, #{sex}, #{address})
+    </insert>
+
+    <update id="updateUser">
+        update user set username = #{username}, sex = #{sex}, address = #{address}
+    </update>
+
 </mapper>

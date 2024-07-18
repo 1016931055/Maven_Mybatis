@@ -50,8 +50,12 @@ public class MybatisTest {
 
    typeAliases标签  ： 起别名 （长名字变为短名字）
            子标签 ： package  （要扫描哪个包）    包下的类全部起个别名。 格式：类名小写 or 保持原类名
-                       name ： 指定要扫描的包
+                       name ：指定要扫描的包
 
+
+    mappers标签： 关联映射文件
+        方式1：通过指定映射文件，关联Mapper接口(XML方式开发)
+        方式2：通过指定Mapper接口，关联映射文件(注解方式开发)
 
 
 

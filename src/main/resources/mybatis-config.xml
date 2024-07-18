@@ -25,9 +25,13 @@
     <!--  配置数据源（数据库连接）  -->
     <environments default="development">
         <environment id="development">
-            <!-- 数据源()-->
+
+            <!-- 事务管理器：按照jdbc默认的事务管理机制-->
             <transactionManager type="JDBC"/>
+
+            <!-- 数据源(数据库连接池): mybatis有自己自带的数据库连接池-->
             <dataSource type="POOLED">
+                <!-- 连接数据库需要的四个参数 -->
                 <property name="driver" value="${jdbc.driver}"/>
                 <property name="url" value="${jdbc.url}"/>
                 <property name="username" value="${jdbc.username}"/>
@@ -38,7 +42,18 @@
 
       <!--配置映射文件关联-->
     <mappers>
-        <mapper resource="com/szl/dao/UserMapper.xml"/>
+        <!-- 方案1：指定关联的映射文件(通过映射文件关联Mapper接口)-->
+<!--        <mapper resource="com/szl/dao/UserMapper.xml"/>  &lt;!&ndash;弊端：当需要关联多个同目录下的文件时会很繁琐&ndash;&gt;-->
+<!--        <mapper resource="com/szl/dao/StudentMapper.xml"/>  -->
+<!--        <mapper resource="com/szl/dao/TeacherMapper.xml"/>  -->
+
+        <!-- 方案2：指定关联的Mapper接口(通过Mapper接口关联映射文件)
+                要求：
+                1.映射文件名和Mapper接口名必须相同
+                2.映射文件和Mapper接口储存在相同的路径下
+        -->
+        <!-- 指定要扫描的所有mapper接口的 *包路径* -->
+        <package name = "com.szl.dao"/>
     </mappers>
 
 </configuration>
