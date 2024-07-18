@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<!--  根元素  -->
+<configuration>
+    <!-- 加载外部配置文件 -->
+    <properties resource="jdbc.properties"/>   <!--文件名-->
+
+    <!-- 开启驼峰映射 ： 把数据表中的带有下划线的字段，变为： Java的驼峰命名方式。 例： user_name => username 或 userName -->
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+    <!--  设置别名 ： 把长名字变为短名字  -->
+    <typeAliases>
+        <!-- 扫描指定的包  , 把包下的所有的类，都起了别名。 别名格式：  全部小写 或 和类名一致  -->
+        <package name="com.szl.pojo"/>
+        <!--  <typeAlias type="com.itheima.pojo.User" alias="User"></typeAlias>
+                <typeAlias type="com.itheima.pojo.Student" alias="Student"></typeAlias>
+                <typeAlias type="com.itheima.pojo.Teacher" alias="Teacher"></typeAlias> -->
+    </typeAliases>
+
+    <!--  配置数据源（数据库连接）  -->
+    <environments default="development">
+        <environment id="development">
+            <!-- 数据源()-->
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+      <!--配置映射文件关联-->
+    <mappers>
+        <mapper resource="com/szl/dao/UserMapper.xml"/>
+    </mappers>
+
+</configuration>

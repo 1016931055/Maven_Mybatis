@@ -1,0 +1,61 @@
+Mybatis项目工程：
+1、核心配置文件（1个）  ： 配置数据库连接参数、 配置和映射文件关联的参数
+2、映射配置文件（多个） ： 编写SQL代码
+3、Mybatis中的API ：
+       SqlSessionFactory ：工厂类。就是为了创建SqlSession对象
+       SqlSession ： 和数据库交互的类（执行SQL语句）
+
+
+Mybatis框架技术的学习，就是以：核心配置文件、映射文件为主
+
+public class MybatisTest {
+    @Test
+    public void testFindAllUser() throws IOException {
+        //配置文件路径
+        String resource = "mybatis-config.xml"; //*核心*配置文件, 没有读取*映射*配置文件
+
+        //基于配置文件路径，创建字节输入流对象
+        InputStream is = Resources.getResourceAsStream(resource);
+
+        //创建SqlSessionFactory(SQL会话工厂) 工厂类对象
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(is); // 固定代码
+
+        //使用SqlSessionFactory工厂类,创建SqlSession对象
+        //SQL会话 对象
+        SqlSession sqlSession = sqlSessionFactory.openSession(); // 打开会话
+
+        //利用SqlSession对象，创建一个代理对象
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+
+        List<User> userList = userMapper.findAllUser();
+
+        //测试用户数据
+        for (User user : userList) {
+            System.out.println(user);
+        }
+    }
+}
+
+
+核心配置文件：
+   properties标签 ： 加载外部的资源配置文件
+          属性 :  resource     指定要引入的外部配置文件路径
+          在核心配置文件中，通过： ${key} 方式引入外部配置文件中的数据
+
+
+   settings标签 ： mybatis中的核心设置标签 （功能比较多。 例：缓存 、驼峰映射、.....）
+          子标签 ： setting
+                     属性：name     设置名
+                          value    设置的开关键
+
+   typeAliases标签  ： 起别名 （长名字变为短名字）
+           子标签 ： package  （要扫描哪个包）    包下的类全部起个别名。 格式：类名小写 or 保持原类名
+                       name ： 指定要扫描的包
+
+
+
+
+
+
+
+

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 利用namespace属性，绑定当前映射文件和Mapper接口映射关联 -->
+<mapper namespace = "com.szl.dao.UserMapper">
+
+    <!-- SQL查询语句 -->
+    <select id="findAllUser" resultType="com.szl.pojo.User">
+        select id, username, birthday, sex, address
+        from user
+    </select>
+
+<!--    <select id="findUserById" parameterType = "_int" resultType="com.itheima.pojo.User">-->
+<!--        select id,user_name, birthday, sex, address-->
+<!--        from user-->
+<!--        where id = #{id}-->
+<!--    </select>-->
+
+<!--    <insert id="addUser">-->
+<!--        insert into student(stu_name, stu_age, stu_gender, stu_phone, stu_address)-->
+<!--        value('张三',22,'男','12345678','上海')-->
+<!--    </insert>-->
+</mapper>

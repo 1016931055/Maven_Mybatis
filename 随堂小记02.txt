@@ -1,0 +1,50 @@
+映射文件：
+    <select>标签
+            属性：
+                id                       当前sql的唯一标记
+                resultType/resultMap     返回值
+
+
+    <ResultMap>标签  （结果集映射标签）
+               作用： 解决查询结果字段名和实体类属性名不一致的问题 、 多表查询结果要使用
+
+
+在Mybatis中使用的占位符：
+#{key} :  在映射文件中做为sql的占位符参数使用
+${key} :  在核心配置文件中获取外部配置文件中的数据;
+          在映射文件中做为sql的占位符参数使用（注意细节：需要使用@Param("参数")声明参数名）
+
+#{key}和${key}的区别：
+#{}：底层是使用PreparedStatement对象，对sql进行预编译，使用占位符。  好处：防止SQL注入
+${}：底层是使用Statement对象，对SQL进行拼接。  会有SQL注入风险
+
+
+动态SQL：
+    where标签： 代替sql语句中的where关键字
+               可以自动去除sql语句中where条件里面多余的or或and
+
+    set标签 ： 代码sql语句中的set关键字 （针对update操作）
+              可以自动除sql语句中多余的逗号
+
+    foreach标签 ： 遍历容器，获取容器中的元素 ，拼接sql
+               <foreach collection="集合/数组"
+                        item="从容器中取出的每一个元素"
+                        separator="元素之间的分隔符号 "
+                        open="以x作为开始"
+                        close="以x作为结束">
+               </foreach>
+
+               insert into 表(字段列表)
+               value (),(),()
+
+
+
+在mybatis的insert操作过程中，存在一种技术：主键回填
+   在向表中插入一行记录后，会自动把当前行的主键列下的数据值获取
+
+
+
+
+
+
+
